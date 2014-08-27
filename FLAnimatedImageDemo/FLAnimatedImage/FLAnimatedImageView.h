@@ -11,7 +11,7 @@
 
 @class FLAnimatedImage;
 @protocol FLAnimatedImageViewDebugDelegate;
-
+@protocol FLAnimatedImageViewPlayBack;
 
 //
 //  An `FLAnimatedImageView` can take an `FLAnimatedImage` and plays it automatically when in view hierarchy and stops when removed.
@@ -27,14 +27,21 @@
 
 @property (nonatomic, strong, readonly) UIImage *currentFrame;
 @property (nonatomic, assign, readonly) NSUInteger currentFrameIndex;
-
+@property (nonatomic, strong) id<FLAnimatedImageViewPlayBack> playbackDelegate;
 #if DEBUG
 // Only intended to report internal state for debugging
 @property (nonatomic, weak) id<FLAnimatedImageViewDebugDelegate> debug_delegate;
 #endif
-
 @end
 
+
+@protocol FLAnimatedImageViewPlayBack <NSObject>
+
+@optional
+
+- (void) playbackStop:(id) imageView;
+
+@end
 
 #if DEBUG
 @protocol FLAnimatedImageViewDebugDelegate <NSObject>

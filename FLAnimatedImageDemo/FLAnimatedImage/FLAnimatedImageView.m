@@ -219,6 +219,9 @@
                 // If we've looped the number of times that this animated image describes, stop looping.
                 self.loopCountdown--;
                 if (self.loopCountdown == 0) {
+                    if (self.playbackDelegate) {
+                        [self.playbackDelegate playbackStop:self];
+                    }
                     [self stopAnimating];
                     return;
                 }
